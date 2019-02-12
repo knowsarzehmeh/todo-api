@@ -21,8 +21,14 @@ app.post('/todos', (req, res) => {
   );
 });
 
+app.get('/todos', async (req, res) => {
+  const todos = await Todo.find();
+  if (!todos) return res.status(404).send('Your todo list is empty');
+  res.send({ todos });
+});
+
 const server = app.listen(3000, () => {
-  console.log('Started on port 3000');
+  console.log('Server started on port 3000');
 });
 
 module.exports = { app, server };
