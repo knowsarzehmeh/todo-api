@@ -27,6 +27,25 @@ app.get('/todos', async (req, res) => {
   res.send({ todos });
 });
 
+app.get('/todos/:id', (req, res) => {
+  const id = req.params.id;
+
+  if (!mongoose.Types.ObjectId.isValid(id))
+    return res.status(400).send('Not a valid Id');
+
+  Todo.findById(id)
+    .then(todo => {
+      if (!todo) {
+        return res.status(404).send();
+      }
+      //  valid id and document found
+      res.send({ todo });
+    })
+    .catch(e => {
+      return res.status(400).send();
+    });
+});
+
 const server = app.listen(3000, () => {
   console.log('Server started on port 3000');
 });

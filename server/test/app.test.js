@@ -1,6 +1,6 @@
 const request = require('supertest');
 
-const { app, server } = require('./../app');
+const { server } = require('./../app');
 const { Todo } = require('./../models/todo');
 
 const todos = [
@@ -21,11 +21,11 @@ beforeEach(done => {
     .then(() => done());
 });
 
-afterEach(async done => {
-  await Todo.deleteMany({});
-  await server.close();
-  done();
-});
+// afterEach(async done => {
+//   await Todo.deleteMany({});
+//   await server.close();
+//   done();
+// });
 
 describe(' POST /todos', () => {
   it('should create a new todo', done => {
