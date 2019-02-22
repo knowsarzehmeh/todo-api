@@ -31,7 +31,7 @@ describe(' POST /todos', () => {
   it('should create a new todo', done => {
     const text = 'Test todo text';
 
-    request(app)
+    request(server)
       .post('/todos')
       .send({ text })
       .expect(200)
@@ -59,7 +59,7 @@ describe(' POST /todos', () => {
   it('should not create todo with invalid body data', done => {
     text = {};
 
-    request(app)
+    request(server)
       .post('/todos')
       .send(text)
       .expect(400)
@@ -70,7 +70,7 @@ describe(' POST /todos', () => {
 
         Todo.find()
           .then(todos => {
-            expect(todos.length).toBe(5);
+            expect(todos.length).toBe(2);
             done();
           })
           .catch(e => done(e));
@@ -80,7 +80,7 @@ describe(' POST /todos', () => {
 
 describe(' GET /todos', () => {
   it('should get all todos', done => {
-    request(app)
+    request(server)
       .get('/todos')
       .expect(200)
       .expect(res => {
@@ -88,4 +88,6 @@ describe(' GET /todos', () => {
       })
       .end(done);
   });
+
+  it('should get a sigle todo', () => {});
 });
