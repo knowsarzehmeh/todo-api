@@ -7,6 +7,9 @@
     "start": "node server/app.js",
     "test": "jest --detectOpenHandles --watchAll"
   },
+  "engines": {
+    "node": "8.11.2"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
