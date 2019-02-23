@@ -31,7 +31,7 @@ app.get('/todos/:id', (req, res) => {
   const id = req.params.id;
 
   if (!mongoose.Types.ObjectId.isValid(id))
-    return res.status(400).send('Not a valid Id');
+    return res.status(400).send({ error: 'Not a valid Id' });
 
   Todo.findById(id)
     .then(todo => {
