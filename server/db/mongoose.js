@@ -6,13 +6,7 @@ const {
   AUTH_SOURCE,
   RETRY_WRITES
 } = process.env;
-if (
-  process.env.TODOAPP_MONGODB_URI &&
-  process.env.REPLICA_SET &&
-  process.env.AUTH_SOURCE &&
-  process.env.RETRY_WRITES
-) {
-}
+
 const MONGODB_URI =
   `${TODOAPP_MONGODB_URI}&replicaSet=${REPLICA_SET}&authSource=${AUTH_SOURCE}&retryWrites=${RETRY_WRITES}` ||
   'mongodb://localhost:27017/TodoApp';
