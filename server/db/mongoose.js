@@ -7,9 +7,11 @@ const {
   RETRY_WRITES
 } = process.env;
 
-const MONGODB_URI =
-  `${TODOAPP_MONGODB_URI}&replicaSet=${REPLICA_SET}&authSource=${AUTH_SOURCE}&retryWrites=${RETRY_WRITES}` ||
-  'mongodb://localhost:27017/TodoApp';
+let MONGODB_URI = `${TODOAPP_MONGODB_URI}&replicaSet=${REPLICA_SET}&authSource=${AUTH_SOURCE}&retryWrites=${RETRY_WRITES}`;
+
+if (process.env.NODE_ENV === 'development')
+  MONGODB_URI = 'mongodb://localhost:27017/TodoApp';
+
 mongoose.Promise = global.Promise;
 mongoose
   .connect(MONGODB_URI, {
