@@ -9,7 +9,6 @@ const {
 
 let MONGODB_URI = `${TODOAPP_MONGODB_URI}&replicaSet=${REPLICA_SET}&authSource=${AUTH_SOURCE}&retryWrites=${RETRY_WRITES}`;
 
-process.env.NODE_ENV = 'development';
 if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test')
   MONGODB_URI = 'mongodb://localhost:27017/TodoApp';
 

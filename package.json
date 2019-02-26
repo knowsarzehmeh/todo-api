@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "start": "node server/app.js",
-    "test": "jest --detectOpenHandles --watchAll"
+    "test": "SET NODE_ENV=test jest --detectOpenHandles --watchAll"
   },
   "engines": {
     "node": "8.11.2"
