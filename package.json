@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node server/app.js",
     "start-dev": "export NODE_ENV=development || SET \"NODE_ENV=development\" && npm start",
+    "start-dev-watch": "export NODE_ENV=development || SET \"NODE_ENV=development\" && nodemon server/app.js",
     "test": "export NODE_ENV = test || SET \"NODE_ENV=test\" && jest --detectOpenHandles --watchAll"
   },
   "engines": {
