@@ -258,3 +258,59 @@ describe('POST /users', () => {
       .end(done);
   });
 });
+
+describe('POST /users/login', () => {
+  it('should login user and return auth token', done => {
+    request(server)
+      .post('/users/login')
+      .send({
+        email: users[1].email,
+        password: users[1].password
+      })
+      .expect(200)
+      .expect(res => {
+        expect(res.header['x-auth']).toBeDefined();
+      })
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        // if no errors, find the user that registered in the db
+        User.findById(users[1]._id)
+          .then(user => {
+            expect(user.tokens[0]).toEqual({
+              access: 'auth',
+              token: res.header['x-auth']
+            });
+            done();
+          })
+          .catch(e => {
+            done(e);
+          });
+      });
+  });
+
+  it('should reject if invalid token', done => {
+    request(server)
+      .post('/users/login')
+      .send({
+        email: users[1].email,
+        password: users[1].password + '1'
+      })
+      .expect(400)
+      .expect(res => {
+        expect(res.header['x-auth']).not.toBeDefined();
+      })
+      .end((err, res) => {
+        if (err) return done(err);
+
+        // find the user
+        User.findById(users[1]._id)
+          .then(user => {
+            expect(user.tokens.length).toBe(0);
+            done();
+          })
+          .catch(e => done(e));
+      });
+  });
+});
