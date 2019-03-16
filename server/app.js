@@ -134,6 +134,19 @@ app.post('/users/login', (req, res) => {
     });
 });
 
+// deleting the currently logged in users
+app.delete('/users/me/token', authenticate, (req, res) => {
+  const user = req.user;
+  user
+    .removeToken(req.token)
+    .then(() => {
+      res.status(200).send();
+    })
+    .catch(e => {
+      res.status(400).send();
+    });
+});
+
 const server = app.listen(port, () => {
   console.log(`Server started on port ${port}`);
 });
