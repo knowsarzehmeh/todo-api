@@ -8,7 +8,7 @@ const { authenticate } = require('./middleware/authenticate');
 
 const app = express();
 app.use(express.json());
-const port = process.env.PORT || 3000;
+const port = process.env.PORT;
 
 app.post('/todos', authenticate, (req, res) => {
   const todo = new Todo({
